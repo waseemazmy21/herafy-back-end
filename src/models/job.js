@@ -48,6 +48,11 @@ const jobSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  status: {
+    type: String,
+    enum: ['open', 'closed'],
+    default: 'open',
+  },
 });
 
 const Job = mongoose.model('Job', jobSchema);
