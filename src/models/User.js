@@ -37,6 +37,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  // to get all propsal of craftsman by craftsmanid
+  proposals: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Proposal',
+    },
+  ],
+
+  //jobs to get all jobs of client by clientid
+  jobs: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Job',
+    },
+  ],
 });
 
 userSchema.methods.genAuthToken = function () {

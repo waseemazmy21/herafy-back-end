@@ -7,6 +7,7 @@ import {
   deleteJob,
 } from '../controllers/job-controller.js';
 import checkClientRole from '../middlewares/check-client-role-mw.js';
+import checkCraftsmanRole from '../middlewares/check-craftsman-role-mw.js';
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.post('/', checkClientRole, createJob);
 
 router.get('/client', checkClientRole, getAllJobsByClientId);
 
-router.get('/', getAllJobs);
+router.get('/', checkCraftsmanRole, getAllJobs);
 
 router.get('/:id', getJobById);
 

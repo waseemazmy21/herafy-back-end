@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import connectDB from './src/db/connect.js';
 import userRouter from './src/routes/user-routes.js';
 import jobRouter from './src/routes/job-routes.js';
+import proposalRouter from './src/routes/proposal-routes.js';
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 // routes
 app.use('/api/users', userRouter);
 app.use('/api/jobs', jobRouter);
+app.use('/api/proposals', proposalRouter);
+
 // db connection
 await connectDB();
 
