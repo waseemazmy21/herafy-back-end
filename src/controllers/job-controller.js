@@ -46,7 +46,7 @@ export const getAllJobsByClientId = async (req, res) => {
 
 export const getAllJobs = async (req, res) => {
   try {
-    const jobs = await Job.find();
+    const jobs = await Job.find({ status: 'open' });
     res.json(jobs);
   } catch (error) {
     console.error('Error retrieving job:', error);
