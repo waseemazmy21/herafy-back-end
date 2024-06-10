@@ -56,3 +56,40 @@ export const getProposalsByJobId = async (req, res) => {
     res.status(500).json('Internal Server Error');
   }
 };
+
+// Accept a proposal
+export const acceptProposal = async (req, res) => {
+  try {
+    const { proposalId } = req.params;
+
+    // Find the proposal to be accepted
+    const proposal = await Proposal.findById(proposalId);
+    if (!proposal) {
+      return res.status(404).json('Proposal not found');
+    }
+
+    // Find the job related to the proposal
+    const job = await Job.findById(proposal.jobId);
+    if (!job) {
+      return res.status(404).json('Job not found');
+    }
+
+    // Update the job status to 'closed'
+    job.status = 'closed';
+    await job.save();
+
+    // Update the accepted proposal status to 'accepted'
+    proposal.status = 'accepted';
+    await proposal.save();
+
+    // Update all other proposals for the same job to 'rejected'
+    await Proposal.updateMany(
+      { jobId: proposal.jobId, _id: { $ne: proposalId } },
+      { status: 'rejected' }
+    );
+
+    res.json('Proposal accepted successfully');
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
