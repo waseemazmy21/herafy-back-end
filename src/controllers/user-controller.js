@@ -132,6 +132,7 @@ export const getCraftsmanDetails = async (req, res) => {
       description: craftsman.description,
       phone: craftsman.phone,
       jobTitle: craftsman.jobTitle,
+      ratings: craftsman.ratings,
     });
   } catch (error) {
     console.error('Error retrieving craftsman:', error);

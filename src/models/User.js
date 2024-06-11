@@ -43,6 +43,8 @@ const userSchema = new mongoose.Schema({
       return this.role === 'craftsman';
     },
   },
+  ratings: { type: [Number], default: [] },
+
   // to get all propsal of craftsman by craftsmanid
   proposals: [
     {

@@ -93,3 +93,35 @@ export const acceptProposal = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const addRatingToUser = async (req, res) => {
+  try {
+    const proposalId = req.params.id;
+    const { rating } = req.body;
+
+    if (!rating || rating < 1 || rating > 5) {
+      return res.status(400).json({ error: 'Rating must be between 1 and 5.' });
+    }
+
+    const proposal = await Proposal.findById(proposalId);
+    if (!proposal) {
+      return res.status(404).json({ error: 'Proposal not found.' });
+    }
+
+    const user = await User.findById(proposal.craftsmanId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    user.ratings.push(rating);
+    await user.save();
+
+    proposal.isRated = true;
+    await proposal.save();
+
+    res.status(200).json({ message: 'Rating added successfully.', user });
+  } catch (error) {
+    console.error('Error adding rating:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+};

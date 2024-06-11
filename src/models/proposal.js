@@ -28,6 +28,10 @@ const proposalSchema = new mongoose.Schema({
     enum: ['accepted', 'rejected', 'pending'],
     default: 'pending',
   },
+  isRated: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Proposal = mongoose.model('Proposal', proposalSchema);

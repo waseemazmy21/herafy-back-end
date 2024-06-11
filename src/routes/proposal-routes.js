@@ -4,6 +4,7 @@ import {
   getProposalsByCraftsmanId,
   getProposalsByJobId,
   acceptProposal,
+  addRatingToUser,
 } from '../controllers/proposal-controller.js';
 import checkCraftsmanRole from '../middlewares/check-craftsman-role-mw.js';
 import checkClientRole from '../middlewares/check-client-role-mw.js';
@@ -20,5 +21,7 @@ router.get('/craftsman', checkCraftsmanRole, getProposalsByCraftsmanId);
 router.get('/job/:id', checkClientRole, getProposalsByJobId);
 
 router.patch('/accept/:proposalId', checkClientRole, acceptProposal);
+
+router.post('/:id/addrating', addRatingToUser);
 
 export default router;

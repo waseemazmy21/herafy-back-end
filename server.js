@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import connectDB from './src/db/connect.js';
+import './src/db/connect.js';
 import userRouter from './src/routes/user-routes.js';
 import jobRouter from './src/routes/job-routes.js';
 import proposalRouter from './src/routes/proposal-routes.js';
@@ -25,9 +25,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/users', userRouter);
 app.use('/api/jobs', jobRouter);
 app.use('/api/proposals', proposalRouter);
-
-// db connection
-await connectDB();
 
 const port = process.env.PORT || 7000;
 
