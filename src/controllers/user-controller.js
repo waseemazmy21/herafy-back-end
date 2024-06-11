@@ -4,7 +4,8 @@ import Mongoose from 'mongoose';
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password, role, jobTitle, description } = req.body;
+    const { name, email, password, role, jobTitle, description, phone } =
+      req.body;
 
     if (!name || !email || !password || !role) {
       return res.status(400).send('missing required fields');
@@ -23,6 +24,7 @@ export const registerUser = async (req, res) => {
       role,
       jobTitle,
       description,
+      phone,
     });
 
     await user.save();
@@ -116,5 +118,23 @@ export const getUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const getCraftsmanDetails = async (req, res) => {
+  try {
+    const craftsman = await User.findById(req.params.id);
+    if (!craftsman) {
+      return res.status(404).json({ error: 'Craftsman not found' });
+    }
+    res.json({
+      name: craftsman.name,
+      description: craftsman.description,
+      phone: craftsman.phone,
+      jobTitle: craftsman.jobTitle,
+    });
+  } catch (error) {
+    console.error('Error retrieving craftsman:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };

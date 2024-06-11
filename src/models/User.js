@@ -37,6 +37,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  phone: {
+    type: String,
+    required: function () {
+      return this.role === 'craftsman';
+    },
+  },
   // to get all propsal of craftsman by craftsmanid
   proposals: [
     {

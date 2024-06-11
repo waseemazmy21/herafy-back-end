@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 const checkUser = (req, res, next) => {
   const token = req.headers['x-auth-token'];
 
-  console.log(token);
   if (!token) {
     return res
       .status(401)
