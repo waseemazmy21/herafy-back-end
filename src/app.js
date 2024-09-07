@@ -1,10 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import connectDB from './src/configs/db-config.js';
-import userRouter from './src/routes/user-routes.js';
-import jobRouter from './src/routes/job-routes.js';
-import proposalRouter from './src/routes/proposal-routes.js';
+import connectDB from './configs/db-config.js';
+import userRouter from './routes/user-routes.js';
+import jobRouter from './routes/job-routes.js';
+import proposalRouter from './routes/proposal-routes.js';
 
 dotenv.config();
 
@@ -18,6 +18,8 @@ app.use(
     exposedHeaders: ['x-auth-token'],
   })
 );
+
+// built in middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
