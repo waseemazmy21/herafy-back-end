@@ -21,7 +21,7 @@ The backend API is built using the following technologies:
 ## Installation and Setup
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/herafy.git
+    git clone https://github.com/waseemazmy21/herafy-back-end
     ```
 2. Navigate to the project directory:
     ```bash
