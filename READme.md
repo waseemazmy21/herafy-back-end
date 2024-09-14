@@ -25,7 +25,7 @@ The backend API is built using the following technologies:
     ```
 2. Navigate to the project directory:
     ```bash
-    cd herafy
+    cd herafy-back-end
     ```
 3. Install dependencies:
     ```bash
