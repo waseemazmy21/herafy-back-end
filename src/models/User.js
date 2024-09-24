@@ -1,75 +1,43 @@
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
+import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minLength: 6,
-  },
-  role: {
-    type: String,
-    enum: ['client', 'craftsman'],
-    required: true,
-  },
-  jobTitle: {
-    type: String,
-    required: function () {
-      return this.role === 'craftsman';
-    },
-  },
-  description: {
-    type: String,
-    required: function () {
-      return this.role === 'craftsman';
-    },
-  },
-  photo: {
-    type: String,
-    default: '',
-  },
-  phone: {
-    type: String,
-    required: function () {
-      return this.role === 'craftsman';
-    },
-  },
-  ratings: { type: [Number], default: [] },
+const options = {
+  discriminatorKey: "role",
+  collection: "User",
+  timestamp: true,
+};
 
-  // to get all propsal of craftsman by craftsmanid
-  proposals: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Proposal',
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-  ],
-
-  //jobs to get all jobs of client by clientid
-  jobs: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Job',
+    email: {
+      type: String,
+      required: true,
+      unique: true,
     },
-  ],
-});
+    password: {
+      type: String,
+      required: true,
+      minLength: 6,
+    },
+    photo: {
+      type: String,
+      default: "",
+    },
+  },
+  options
+);
 
 userSchema.methods.genAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, role: this.role },
     process.env.JWTSEC
-    // { expiresIn: '1h' }
   );
   return token;
 };
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 export default User;
