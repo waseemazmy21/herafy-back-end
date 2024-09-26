@@ -8,12 +8,6 @@ const clientSchema = new mongoose.Schema({
       ref: "Job",
     },
   ],
-  reviews: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Review",
-    },
-  ],
 });
 
 const Client = User.discriminator("client", clientSchema);

@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const proposalSchema = new mongoose.Schema(
+const reviewSchema = new mongoose.Schema(
   {
-    jobId: {
+    clientId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Job",
+      ref: "User",
       required: true,
     },
     craftsmanId: {
@@ -12,22 +12,24 @@ const proposalSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    message: {
-      type: String,
+    jobId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Job",
       required: true,
     },
-    proposedBudget: {
+    rating: {
       type: Number,
       required: true,
+      min: 1,
+      max: 5,
     },
-    status: {
+    comment: {
       type: String,
-      enum: ["accepted", "rejected", "pending"],
-      default: "pending",
+      required: true,
     },
   },
   { timestamps: true }
 );
 
-const Proposal = mongoose.model("Proposal", proposalSchema);
-export default Proposal;
+const Review = mongoose.model("Review", reviewSchema);
+export default Review;
