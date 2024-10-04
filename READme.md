@@ -3,7 +3,7 @@
 This repository contains the backend API for **Herafy**, a platform connecting clients and craftsmen. The API handles user authentication, job management, proposal submissions, and client reviews, supporting the core functionality of the platform.
 
 ## Features
-- **User Authentication**: Secure registration and login for clients and craftsmen.
+- **User Authentication**: Using JSON Web Token.
 - **Job Management**: Clients can post and manage job listings.
 - **Proposal Handling**: Craftsmen can submit proposals for client jobs.
 - **Review System**: Clients can leave reviews after job completion.

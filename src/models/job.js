@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { categories } from "../configs/categories";
+import { categories } from "../configs/categories.js";
 
 const jobSchema = new mongoose.Schema(
   {
