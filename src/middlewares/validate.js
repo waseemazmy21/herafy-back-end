@@ -10,7 +10,10 @@ export function handleValidationErrors(req, res, next) {
       }
       return acc;
     }, {});
-    return res.status(400).json({ errors: errorsMessages });
+    return res.status(400).json({
+      message: "Missing or invalid fields",
+      errors: errorsMessages,
+    });
   }
   next();
 }

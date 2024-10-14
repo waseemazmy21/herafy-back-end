@@ -34,3 +34,11 @@ export const craftsmanRegistrationValidator = [
 
   body("description").trim().notEmpty().withMessage("Description is required"),
 ];
+
+export const loginValidator = [
+  body("email", "Invalid email format").trim().isEmail(),
+
+  body("password")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters long"),
+];
