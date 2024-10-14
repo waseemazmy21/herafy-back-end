@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import connectDB from "./configs/db-config.js";
 import authRouter from "./routes/auth-routes.js";
@@ -12,7 +13,7 @@ dotenv.config();
 
 const app = express();
 
-// middlewares
+// third-pary middlewares
 app.use(
   cors({
     origin: "*",
@@ -20,6 +21,7 @@ app.use(
     exposedHeaders: ["x-auth-token"],
   })
 );
+app.use(cookieParser());
 
 // built in middlewares
 app.use(express.json());
