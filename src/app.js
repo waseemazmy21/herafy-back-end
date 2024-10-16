@@ -16,9 +16,8 @@ const app = express();
 // third-pary middlewares
 app.use(
   cors({
-    origin: "*",
-    allowedHeaders: "*",
-    exposedHeaders: ["x-auth-token"],
+    origin: "http://localhost:3000",
+    credentials: true,
   })
 );
 app.use(cookieParser());
