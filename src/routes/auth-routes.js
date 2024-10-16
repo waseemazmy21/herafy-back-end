@@ -2,9 +2,13 @@ import express from "express";
 import {
   registerClient,
   registerCraftsman,
+  loginUser,
 } from "../controllers/auth-controller.js";
-import { body } from "express-validator";
-import { clientRegistrationValidator } from "../validators/auth-validators.js";
+import {
+  clientRegistrationValidator,
+  craftsmanRegistrationValidator,
+  loginValidator,
+} from "../validators/auth-validators.js";
 import { handleValidationErrors } from "../middlewares/validate.js";
 
 const router = express.Router();
@@ -15,8 +19,14 @@ router.post(
   handleValidationErrors,
   registerClient
 );
-router.post("/register-craftsman", registerCraftsman);
 
-// router.post("/login", loginUser);
+router.post(
+  "/register-craftsman",
+  craftsmanRegistrationValidator,
+  handleValidationErrors,
+  registerCraftsman
+);
+
+router.post("/login", loginValidator, handleValidationErrors, loginUser);
 
 export default router;
