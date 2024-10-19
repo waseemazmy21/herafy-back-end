@@ -35,7 +35,8 @@ export const registerClient = asyncHandler(async (req, res, next) => {
 });
 
 export const registerCraftsman = asyncHandler(async (req, res) => {
-  const { name, email, password, photo, jobTitle, description } = req.body;
+  const { name, email, password, photo, jobTitle, description, phone } =
+    req.body;
 
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
@@ -47,6 +48,7 @@ export const registerCraftsman = asyncHandler(async (req, res) => {
     photo,
     jobTitle,
     description,
+    phone,
   });
 
   await craftsman.save();

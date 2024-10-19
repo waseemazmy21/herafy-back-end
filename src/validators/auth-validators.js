@@ -30,6 +30,8 @@ export const clientRegistrationValidator = [...userRegistrationValidator];
 export const craftsmanRegistrationValidator = [
   ...userRegistrationValidator,
 
+  body("phone").trim().notEmpty().withMessage("Job title is required"),
+
   body("jobTitle").trim().notEmpty().withMessage("Job title is required"),
 
   body("description").trim().notEmpty().withMessage("Description is required"),
